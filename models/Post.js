@@ -9,4 +9,4 @@ const PostSchema = mongoose.Schema({
   rating: Number,
 });
 
-module.exports = mongoose.model("Data", PostSchema);
+module.exports = mongoose.model("Movie", PostSchema);

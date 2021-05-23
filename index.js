@@ -1,12 +1,20 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const cors = require("cors");
+
 require("dotenv/config");
 
-const Post = require("./models/Post");
+app.use(cors());
+app.use(bodyParser.json());
+
+const postsRoute = require("./routes/posts");
+
+app.use("/post", postsRoute);
 
 app.get("/", (req, res) => {
-  res.send("get request");
+  res.send("on home");
 });
 
 mongoose
@@ -14,12 +22,9 @@ mongoose
     useUnifiedTopology: true,
     useNewUrlParser: true,
   })
-  .then(() => console.log("successfully connected"))
+  .then(() => console.log("DB successfully connected"))
   .catch((error) => console.error("mongoose connection failed...", error));
 
-app.post("/post", (req, res) => {
-  
-});
 app.listen(3000, () => {
   console.log("server started");
 });

@@ -25,6 +25,6 @@ mongoose
   .then(() => console.log("DB successfully connected"))
   .catch((error) => console.error("mongoose connection failed...", error));
 
-app.listen(3000, () => {
+app.listen(3001, () => {
   console.log("server started");
 });

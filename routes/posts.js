@@ -21,7 +21,8 @@ router
         rating: req.body.rating,
       });
       const savedMovie = await movie.save();
-      res.json({ success: true, product: savedMovie });
+      const data = await Movie.find();
+      res.json(data);
     } catch (error) {
       res.status(500).json({
         success: false,
@@ -29,14 +30,16 @@ router
         errorMessage: error.message,
       });
     }
-  })
-  router.route("/:movieId")
-  .delete(async (req, res) => {
-    try {
-      const removedMovie = await Movie.remove({ _id: req.params.movieId });
-      res.json(removedMovie);
-    } catch (error) {
-      res.json({ error_message: error.message });
-    }
   });
+
+router.route("/:movieId").delete(async (req, res) => {
+  try {
+    const removedMovie = await Movie.remove({ _id: req.params.movieId });
+    res.json(removedMovie);
+  } catch (error) {
+    res.json({ error_message: error.message });
+  }
+});
+
+
 module.exports = router;
